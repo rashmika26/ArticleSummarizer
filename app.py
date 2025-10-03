@@ -88,7 +88,7 @@ st.title("📰 Express Computer Article Summarizer")
 
 # Add description
 st.markdown(
-    "Summarizes articles exclusively from **Express Computer**, a platform delivering updates on enterprise technology."
+    "Summarizes articles exclusively from **Express Computer**, a platform that keeps you updated on developments in the tech world."
 )
 
 topic = st.text_input("Enter a topic to search", placeholder="e.g. semiconductor, AI, data privacy")
