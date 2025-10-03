@@ -86,8 +86,12 @@ def summarize_text(text):
 st.set_page_config(page_title="News Summarizer", layout="centered")
 st.title("📰 Express Computer Article Summarizer")
 
-topic = st.text_input("Enter a topic to search", placeholder="e.g. semiconductor, AI, data privacy")
+# Add description
+st.markdown(
+    "Summarizes articles from **Express Computer**, a platform delivering updates on enterprise technology."
+)
 
+topic = st.text_input("Enter a topic to search", placeholder="e.g. semiconductor, AI, data privacy")
 max_links = st.slider("Number of articles to summarize", 1, 5, 3)
 
 if st.button("🔍 Search and Summarize"):
@@ -100,6 +104,17 @@ if st.button("🔍 Search and Summarize"):
         st.success(f"Found {len(links)} article(s) on '{topic}'")
 
         for i, (title, url) in enumerate(links, 1):
+            st.markdown(f"### 🗞️ Article {i}: [{title}]({url})")
+
+            with st.spinner("Fetching and summarizing..."):
+                article_text = fetch_article_text(url)
+                summary = summarize_text(article_text)
+
+            st.markdown("**Summary:**")
+            st.write(summary)
+            st.markdown("---")
+            time.sleep(2)
+
             st.markdown(f"### 🗞️ Article {i}: [{title}]({url})")
 
             with st.spinner("Fetching and summarizing..."):
